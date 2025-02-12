@@ -9,4 +9,18 @@
 
 @theme {
     --font-sans: 'Inter', sans-serif;
+    
+    --color-background: #2F2F33;
+    --color-radioList: #4D4D56;
+    --color-radio: #62626C;
+
+    --shadow-wrapper: 
+        inset 0 0 5px rgba(15, 15, 30, 0.6),
+        0 0 10px rgba(15, 15, 30, 0.5)
+    ;
+    --shadow-radio: {
+        inset 0 0 5px rgba(98, 98, 108, 0.6),
+        0 0 10px rgba(98, 98, 108, 0.5)
+    ;
+    }
 }
