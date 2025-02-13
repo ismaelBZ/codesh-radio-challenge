@@ -1,17 +1,27 @@
 import {useState} from "react";
-import MenuIcon from "./../assets/icons/menu-icon.svg"
-import CheckIcon from "./../assets/icons/favorite-icon.svg"
+import MenuIcon from "./../assets/icons/menu-icon.svg";
+import CheckIcon from "./../assets/icons/favorite-icon.svg";
+import ReturnIcon from "./../assets/icons/return-icon.svg";
 
-const RadioSearch = () => {
+const RadioSearch = ({setIsDisplayingSearch} : {setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const [isSelected, setIsSelected] = useState(true)
-
     return (
         <div>
-            {/* Menu Button */}
-            <button className="float-right py-3">
-                <img src={MenuIcon} alt="Show Radios" />
+            {/* Return Button */}
+            <button className="float-left py-3 lg:hidden">
+                <img 
+                    src={ReturnIcon} 
+                    className="w-[35px] h-auto"
+                    alt="Return to your favorites Radios" />
             </button>
             
+            {/* Menu Button */}
+            <button onClick={() => setIsDisplayingSearch && setIsDisplayingSearch(false)} 
+                className="float-right py-3"
+            >
+                <img src={MenuIcon} alt="Show Radios" />
+            </button>
+
             {/* Search */}
             <form className="w-full mt-[70px] flex justify-center">
                 <input 

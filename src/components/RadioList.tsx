@@ -6,13 +6,15 @@ import deleteIcon from "./../assets/icons/delete-icon.svg"
 import playFocus from "./../assets/icons/play-icon.svg"
 import pauseFocus from "./../assets/icons/pause-icon.svg"
 
-const RadioList = () => {
+const RadioList = ({setIsDisplayingSearch} : {setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const [isNotPlaying, setIsNotPlaying] = useState(false);
 
     return (
         <div>
             {/* Search Button */}
-            <button className="my-[12px] float-right">
+            <button onClick={() => setIsDisplayingSearch && setIsDisplayingSearch(true)}
+                className="my-[12px] float-right"
+            >
                 <img src={searchIcon} alt="Search Radios" />
             </button>
             
@@ -23,10 +25,10 @@ const RadioList = () => {
             <p className="mt-2 text-white uppercase">Favorite Radios</p>
 
             {/* Radios */}
-            <div className="relative mx-[4px]"> {/* compensate the blur */}
+            <div className="relative mx-[4px] pb-[20px]" > {/* compensate the blur */}
                 
                 {/* Background blur */}
-                <div className="absolute -left-[2%] w-[104%] h-[104%] 
+                <div className="absolute w-[100%] h-[100%] 
                         bg-radioList rounded-lg shadow-wrapper blur-[1px]
                     "
                 ></div>
@@ -39,7 +41,7 @@ const RadioList = () => {
                             <button className="px-[12px] py-[9px]">
                                 <img src={isNotPlaying ? playFocus : pauseFocus} alt={isNotPlaying ? "Play" : "Stop"} />
                             </button>
-                        
+
                             {/* Radio Info */}
                             <div>
                                 <h2 className="font-semibold text-2xl">Radio Name</h2>
@@ -55,7 +57,7 @@ const RadioList = () => {
                             relative"
                     >
                         {/* Background blur */}
-                        <div className="absolute -top-[1%] -left-[1%] w-[102%] h-[101%] 
+                        <div className="absolute top-[0] left-0 w-[100%] h-[100%] 
                                 bg-radio rounded-sm blur-[1px]
                             "
                         ></div>
@@ -87,7 +89,7 @@ const RadioList = () => {
                             relative"
                     >
                         {/* Background blur */}
-                        <div className="absolute -top-[1%] -left-[1%] w-[102%] h-[101%] 
+                        <div className="absolute top-[0] left-0 w-[100%] h-[100%] 
                                 bg-radio rounded-sm blur-[1px]
                             "
                         ></div>
@@ -119,7 +121,7 @@ const RadioList = () => {
                             relative"
                     >
                         {/* Background blur */}
-                        <div className="absolute -top-[1%] -left-[1%] w-[102%] h-[101%] 
+                        <div className="absolute top-[0] left-0 w-[100%] h-[100%] 
                                 bg-radio rounded-sm blur-[1px]
                             "
                         ></div>
@@ -151,7 +153,7 @@ const RadioList = () => {
                             relative"
                     >
                         {/* Background blur */}
-                        <div className="absolute -top-[1%] -left-[1%] w-[102%] h-[101%] 
+                        <div className="absolute top-[0] left-0 w-[100%] h-[100%] 
                                 bg-radio rounded-sm blur-[1px]
                             "
                         ></div>
@@ -183,7 +185,7 @@ const RadioList = () => {
                             relative"
                     >
                         {/* Background blur */}
-                        <div className="absolute -top-[1%] -left-[1%] w-[102%] h-[101%] 
+                        <div className="absolute top-[0] left-0 w-[100%] h-[100%] 
                                 bg-radio rounded-sm blur-[1px]
                             "
                         ></div>
@@ -211,37 +213,6 @@ const RadioList = () => {
                         </div>
                     </li>
 
-                    <li className="-mx-[6px] py-[15px] px-[12px] 
-                            relative"
-                    >
-                        {/* Background blur */}
-                        <div className="absolute -top-[1%] -left-[1%] w-[102%] h-[101%] 
-                                bg-radio rounded-sm blur-[1px]
-                            "
-                        ></div>
-                        
-                        <div className="relative z-10 flex justify-between items-center">
-                            {/* Button & Info */}
-                            <div className="flex gap-[10px] items-center">
-                                {/* Play Pause */}
-                                <button>
-                                    <img src={isNotPlaying ? playIcon : stopIcon} alt={isNotPlaying ? "Play" : "Stop"} />
-                                </button>
-
-                                {/* Radio Info */}
-                                <div>
-                                    <h2 className="font-semibold text-2xl">Radio Name</h2>
-                                </div>
-                            </div>
-
-                            {/* Edit & Delete Radio */}
-                            <div>
-                                <button className="mr-1">
-                                    <img src={deleteIcon} alt="Delete radio" />
-                                </button>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
