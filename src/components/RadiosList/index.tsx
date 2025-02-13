@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import RadiosList from "./components/RadiosList";
-import FavoritesRadios from "./components/FavoritesRadios";
-import { CurrentStation } from "./@types/CurrentStation";
+import {useState} from 'react';
+import searchIcon from './../../assets/icons/search-icon.svg'
+import { CurrentRadio } from './CurrentRadio';
+import { RadioItem } from './RadioItem'
+import { CurrentStation } from '../../@types/CurrentStation';
 
-const data = [
+const radios = [
     {
         "changeuuid": "647c930b-ba03-4723-8807-496e548fea45",
         "stationuuid": "db93a00f-9191-46ab-9e87-ec9b373b3eee",
@@ -123,48 +124,64 @@ const data = [
     }
 ]
 
-function App() {
-    const [deviceType, setDeviceType] = useState<"mobile" | "desktop">("mobile");
-    const [isDisplayingSearch, setIsDisplayingSearch] = useState(false)
-    const [currentStation, setCurrentStation] = useState<CurrentStation | null>(null);
-
-    useEffect(() => {
-        handleDeviceType();
-        window.addEventListener('resize', handleDeviceType);
-    }, []);
-
-    const handleDeviceType = () => {
-        const width = window.innerWidth
-
-        if (width < 1025) {
-            setDeviceType("mobile");
-        } else {
-            setDeviceType("desktop");
-        }
-    }
+const RadioList = ({
+        setIsDisplayingSearch,
+        setCurrentStation,
+        currentStation
+    } : {
+        setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>
+        setCurrentStation: React.Dispatch<React.SetStateAction<CurrentStation | null>>
+        currentStation: CurrentStation | null
+    }) => {
+    
+        const [isNotPlaying, setIsNotPlaying] = useState(false);
 
     return (
-        <div className="px-[20px]">
-            {/* App background */}
-            <div className="-mx-[20px] fixed w-svw h-svh bg-background -z-10"></div> {/* used to fix RadiosList hight because the blur is 104% */}
+        <div>
+            {/* Search Button */}
+            <button onClick={() => setIsDisplayingSearch && setIsDisplayingSearch(true)}
+                className="my-[12px] float-right"
+            >
+                <img src={searchIcon} alt="Search Radios" />
+            </button>
+            
+            {/* Title */}
+            <h1 className="py-[37px] font-semibold text-[1.75rem] text-center text-white">Radio Browser</h1>
 
-            {deviceType === "mobile" ?
-                <div className="pb-[70px]">
-                    {isDisplayingSearch ? <FavoritesRadios setIsDisplayingSearch={setIsDisplayingSearch} /> : <RadiosList setCurrentStation={setCurrentStation} />}
-                </div>
-                : deviceType === "desktop" &&
-                <div className="-ml-[20px] grid gap-[40px] grid-rows-1 grid-cols-[320px_1fr] "
-                >
-                    <div className="pl-[10px] pr-[16px] min-h-svh bg-[#1E1E21]">
-                        <FavoritesRadios />
-                    </div>
-                    <div className="pb-[70px]">
-                        <RadiosList setCurrentStation={setCurrentStation} currentStation={currentStation}/>
-                    </div>
-                </div>
-            }
+            {/* Favorite Radios */}
+            <p className="mt-2 text-white uppercase">Favorite Radios</p>
+
+            {/* Radios */}
+            <div className="relative mx-[4px] pb-[20px]" > {/* compensate the blur */}
+                
+                {/* Background blur */}
+                <div className="absolute w-[100%] h-[100%] 
+                        bg-radioList rounded-lg shadow-wrapper blur-[1px]
+                    "
+                ></div>
+
+                {/* Current Radio */}
+                {currentStation &&           
+                    <CurrentRadio station={currentStation}/>
+                }
+
+                {/* Radios List */}
+                <ul className="flex flex-col gap-[18px]">
+
+                    {radios.map((radio) => {
+                        
+                        return(
+                            <li key={radio.stationuuid}>
+                                <RadioItem {...radio} setCurrentStation={setCurrentStation}/>
+                            </li>
+                        )
+
+                    })}
+
+                </ul>
+            </div>
         </div>
     )
 }
 
-export default App
+export default RadioList;

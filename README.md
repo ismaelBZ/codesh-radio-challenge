@@ -26,3 +26,11 @@
 <> Verificar os itens obrigatórios e deixa-los a vista durante a codificação do frontend
 <> Fazer o download dos icones do figma
 <> Começar a codificação estática mobile-first
+<> Fazer a implementação do audio de uma rádio mocada -> radio tocando no momento
+    <> Elemento <audio> -> handleAudio -> document.getElementById("uuid") -> audio.play(), audio.pause()
+    <> Entender o que é necessário para o audio tocar e pausar corretamente
+        <> Não Está Tocando ? play : pause 
+    <> Entender como os Componentes se comunicam
+        <> Como que a estáção que está tocando vai para o topo da lista
+
+<> Existe uma biblioteca pronta para fazer a requisição e mapeamento das rádios https://www.npmjs.com/package/radio-browser

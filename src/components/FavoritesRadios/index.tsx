@@ -1,9 +1,10 @@
 import {useState} from "react";
-import MenuIcon from "./../assets/icons/menu-icon.svg";
-import CheckIcon from "./../assets/icons/favorite-icon.svg";
-import ReturnIcon from "./../assets/icons/return-icon.svg";
+import MenuIcon from "./../../assets/icons/menu-icon.svg";
+import CheckIcon from "./../../assets/icons/favorite-icon.svg";
+import ReturnIcon from "./../../assets/icons/return-icon.svg";
 
-const RadioSearch = ({setIsDisplayingSearch} : {setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>}) => {
+const RadioSearch = (
+    {setIsDisplayingSearch} : {setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>}) => {
     const [isSelected, setIsSelected] = useState(true)
     return (
         <div>
