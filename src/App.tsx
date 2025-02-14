@@ -153,7 +153,8 @@ function App() {
                 
                 <div className="pb-[70px]">
                     {isDisplayingSearch ? 
-                        <RadiosList 
+                        <RadiosList
+                            favoritesRadios={favoritesRadios}
                             setFavoritesRadios={setFavoritesRadios} 
                             setIsDisplayingSearch={setIsDisplayingSearch} 
                             setCurrentStation={setCurrentStation}
@@ -172,7 +173,8 @@ function App() {
                 <div className="-ml-[20px] grid gap-[40px] grid-rows-1 grid-cols-[320px_1fr] "
                 >
                     <div className="pl-[10px] pr-[16px] min-h-svh bg-[#1E1E21]">
-                        <RadiosList 
+                        <RadiosList
+                            favoritesRadios={favoritesRadios}
                             setCurrentStation={setCurrentStation} 
                             setFavoritesRadios={setFavoritesRadios} 
                         />

@@ -2,30 +2,29 @@ import { useState } from "react"
 import CheckIcon from "./../../assets/icons/favorite-icon.svg";
 import { RadioCardT } from "../../@types/RadioCard";
 
-const RadioCard = ({setFavoritesRadios, setCurrentStation, stationuuid, name, url_resolved, country, tags} : RadioCardT) => {
-    const [isSelected, setIsSelected] = useState(true)
-
+const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stationuuid, name, url_resolved, country, tags} : RadioCardT) => {
+    const isInFavorites = favoritesRadios?.find(station => station.stationuuid === stationuuid);
+    
     const handleClick = () => {
         setFavoritesRadios((prev) => {
-
             if (prev) {
                 const favoriteIndex = prev.findIndex((station) => station.stationuuid === stationuuid); // Verify if is's already a favorite station
                 
                 // If is in favorites, favoriteIndex returns index, else favoriteIndex returns -1 and jump to else statement to add to favorites
                 if (favoriteIndex >= 0) {
-                    const newFavorites = prev.slice(0);
-                    newFavorites.splice(favoriteIndex, favoriteIndex + 1);
+                    const newFavorites = prev.slice(0); // clone the list
+                    newFavorites.splice(favoriteIndex, favoriteIndex + 1); // remove the station
                     return newFavorites;
                 } else {
-                return ([ ...prev, 
-                    {
-                        stationuuid,
-                        name,
-                        url_resolved,
-                        country,
-                        tags
-                    }
-                ]);
+                    return ([ ...prev, 
+                        {
+                            stationuuid,
+                            name,
+                            url_resolved,
+                            country,
+                            tags
+                        }
+                    ]);
                 }
             } else { // If it's the firs favorite station
                 return [{
@@ -37,7 +36,19 @@ const RadioCard = ({setFavoritesRadios, setCurrentStation, stationuuid, name, ur
                 }]
             }
         })
+
+        if (isInFavorites) return // Don't play the station, just remove form favorites, did in setFavoritesRadios
+        
+        setCurrentStation({
+            name,
+            stationuuid,
+            url_resolved,
+            country,
+            tags
+        })
     }
+
+    console.log(isInFavorites);
 
     return (
         <button onClick={handleClick}>
@@ -47,14 +58,14 @@ const RadioCard = ({setFavoritesRadios, setCurrentStation, stationuuid, name, ur
                 "
             ></div>
 
-            <p className="relative z-10 px-[19px] py-[15px] 
+            <div className="relative z-10 px-[19px] py-[15px] 
                 flex justify-between text-2xl text-white
                 ">
-                <span>{name}</span>
-                {isSelected &&
-                    <span><img src={CheckIcon} alt="Selected" /></span>
+                <p className="text-left">{name}</p>
+                {isInFavorites &&
+                    <div className="w-[22px] h-[auto]"><img src={CheckIcon} alt="Selected" /></div>
                 }
-            </p>
+            </div>
         </button>
     )
 }

@@ -18,7 +18,7 @@ const RadioItem = ({
         string, 
         url_resolved: string, 
         country: string,
-        tags: string
+        tags?: string
         setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>
     }) => {
     const [isNotPlaying, setIsNotPlaying] = useState(false)

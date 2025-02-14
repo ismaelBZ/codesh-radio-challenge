@@ -11,7 +11,7 @@ import ReturnIcon from "./../../assets/icons/return-icon.svg";
 import NextIcon from "./../../assets/icons/more-icon.svg";
 import BackIcon from "./../../assets/icons/back-icon.svg"
 
-const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStation} : RadioSearchT) => {
+const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStation, favoritesRadios} : RadioSearchT) => {
     const [radios, setRadios] = useState<Station[] | null>(null);
     const [pagination, setPagination] = useState<number[]>([1, 2, 3, 4])
     const [paginationOffset, setPaginationOffset] = useState(0)
@@ -155,7 +155,7 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
                         radio.name = "No name"
                     } return (
                         <li className="relative" key={radio.stationuuid}>
-                            <RadioCard {...radio} setFavoritesRadios={setFavoritesRadios} setCurrentStation={setCurrentStation}/>
+                            <RadioCard {...radio} favoritesRadios={favoritesRadios} setFavoritesRadios={setFavoritesRadios} setCurrentStation={setCurrentStation}/>
                         </li>
                     )
                 })}
