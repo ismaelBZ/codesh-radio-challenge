@@ -3,7 +3,7 @@ import playIcon from "./../../assets/icons/play-circle-icon.svg";
 import stopIcon from "./../../assets/icons/pause-circle-icon.svg";
 import deleteIcon from "./../../assets/icons/delete-icon.svg";
 import editIcon from "./../../assets/icons/edit-icon.svg";
-import { CurrentStation } from "../../@types/CurrentStation";
+import { Station } from "../../@types/Station";
 
 const RadioItem = ({
         name, 
@@ -19,7 +19,7 @@ const RadioItem = ({
         url_resolved: string, 
         country: string,
         tags: string
-        setCurrentStation: React.Dispatch<React.SetStateAction<CurrentStation | null>>
+        setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>
     }) => {
     const [isNotPlaying, setIsNotPlaying] = useState(false)
 

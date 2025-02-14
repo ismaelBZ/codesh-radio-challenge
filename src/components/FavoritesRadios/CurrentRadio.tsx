@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PlayButton from "./../../assets/icons/play-icon.svg"
 import PauseButton from "./../../assets/icons/pause-icon.svg"
-import { CurrentStation } from "../../@types/CurrentStation";
+import { Station } from "../../@types/Station";
 
 
 const radio = {
@@ -44,7 +44,7 @@ const radio = {
     "has_extended_info": false
 }
 
-const CurrentRadio = ({station} : {station: CurrentStation | null}) => {
+const CurrentRadio = ({station} : {station: Station | null}) => {
     const [isPlaying, setIsPlaying] = useState(true);
     
     const handlePlay = () => {

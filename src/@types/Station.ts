@@ -1,4 +1,4 @@
-export type CurrentStation = {
+export type Station = {
     stationuuid: string,
     name: string,
     url_resolved: string,

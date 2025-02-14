@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import RadiosList from "./components/RadiosList";
 import FavoritesRadios from "./components/FavoritesRadios";
-import { CurrentStation } from "./@types/CurrentStation";
+import RadiosList from "./components/Radios";
+import { Station } from "./@types/Station";
 
 const data = [
     {
@@ -126,9 +126,10 @@ const data = [
 function App() {
     const [deviceType, setDeviceType] = useState<"mobile" | "desktop">("mobile");
     const [isDisplayingSearch, setIsDisplayingSearch] = useState(false)
-    const [currentStation, setCurrentStation] = useState<CurrentStation | null>(null);
+    const [currentStation, setCurrentStation] = useState<Station | null>(null);
 
     useEffect(() => {
+        {/* Handle responsiveness on resize */}
         handleDeviceType();
         window.addEventListener('resize', handleDeviceType);
     }, []);
@@ -143,6 +144,7 @@ function App() {
         }
     }
 
+
     return (
         <div className="px-[20px]">
             {/* App background */}
@@ -150,16 +152,16 @@ function App() {
 
             {deviceType === "mobile" ?
                 <div className="pb-[70px]">
-                    {isDisplayingSearch ? <FavoritesRadios setIsDisplayingSearch={setIsDisplayingSearch} /> : <RadiosList setCurrentStation={setCurrentStation} />}
+                    {isDisplayingSearch ? <RadiosList setIsDisplayingSearch={setIsDisplayingSearch} /> : <FavoritesRadios setCurrentStation={setCurrentStation}  currentStation={currentStation}/>}
                 </div>
                 : deviceType === "desktop" &&
                 <div className="-ml-[20px] grid gap-[40px] grid-rows-1 grid-cols-[320px_1fr] "
                 >
                     <div className="pl-[10px] pr-[16px] min-h-svh bg-[#1E1E21]">
-                        <FavoritesRadios />
+                        <RadiosList />
                     </div>
                     <div className="pb-[70px]">
-                        <RadiosList setCurrentStation={setCurrentStation} currentStation={currentStation}/>
+                        <FavoritesRadios setCurrentStation={setCurrentStation} currentStation={currentStation}/>
                     </div>
                 </div>
             }
