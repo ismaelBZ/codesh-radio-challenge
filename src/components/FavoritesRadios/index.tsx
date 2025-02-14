@@ -124,13 +124,15 @@ const radios = [
 ]
 
 const FavoritesRadios = ({
-        setIsDisplayingSearch,
+        favoritesRadios,
+        currentStation,
         setCurrentStation,
-        currentStation
+        setIsDisplayingSearch
     } : {
-        setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>
-        setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>
         currentStation: Station | null
+        favoritesRadios: Station[] | null
+        setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>
+        setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>
     }) => {
     
 
@@ -166,7 +168,7 @@ const FavoritesRadios = ({
                 {/* Radios List */}
                 <ul className="flex flex-col gap-[18px]">
 
-                    {radios.map((radio) => {
+                    {favoritesRadios && favoritesRadios.map((radio) => {
                         
                         return(
                             <li key={radio.stationuuid}>

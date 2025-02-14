@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 // Types
 import { Station } from "../../@types/Station";
+import { RadioSearchT } from "../../@types/RadioSearch";
+
 // Components
 import { RadioCard } from "./RadioCard";
 // Icons
@@ -9,7 +11,7 @@ import ReturnIcon from "./../../assets/icons/return-icon.svg";
 import NextIcon from "./../../assets/icons/more-icon.svg";
 import BackIcon from "./../../assets/icons/back-icon.svg"
 
-const RadioSearch = ({ setIsDisplayingSearch }: { setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStation} : RadioSearchT) => {
     const [radios, setRadios] = useState<Station[] | null>(null);
     const [pagination, setPagination] = useState<number[]>([1, 2, 3, 4])
     const [paginationOffset, setPaginationOffset] = useState(0)
@@ -110,8 +112,6 @@ const RadioSearch = ({ setIsDisplayingSearch }: { setIsDisplayingSearch?: React.
             })
         }
     }
-    
-    console.log(pagination);
 
     return (
         <div className="pb-[30px]">
@@ -155,7 +155,7 @@ const RadioSearch = ({ setIsDisplayingSearch }: { setIsDisplayingSearch?: React.
                         radio.name = "No name"
                     } return (
                         <li className="relative" key={radio.stationuuid}>
-                            <RadioCard {...radio}/>
+                            <RadioCard {...radio} setFavoritesRadios={setFavoritesRadios} setCurrentStation={setCurrentStation}/>
                         </li>
                     )
                 })}
