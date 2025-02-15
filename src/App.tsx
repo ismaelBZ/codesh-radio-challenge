@@ -163,7 +163,8 @@ function App() {
                         <FavoritesRadios
                             favoritesRadios={favoritesRadios} 
                             currentStation={currentStation}
-                            setCurrentStation={setCurrentStation}  
+                            setCurrentStation={setCurrentStation}
+                            setFavoritesRadios={setFavoritesRadios} 
                         />
                     }
                 </div>
@@ -183,7 +184,8 @@ function App() {
                         <FavoritesRadios 
                             favoritesRadios={favoritesRadios}
                             currentStation={currentStation}
-                            setCurrentStation={setCurrentStation}  
+                            setCurrentStation={setCurrentStation} 
+                            setFavoritesRadios={setFavoritesRadios}
                         />
                     </div>
                 </div>

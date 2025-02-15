@@ -1,4 +1,3 @@
-import { useState } from "react"
 import CheckIcon from "./../../assets/icons/favorite-icon.svg";
 import { RadioCardT } from "../../@types/RadioCard";
 
@@ -48,22 +47,21 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
         })
     }
 
-    console.log(isInFavorites);
-
     return (
-        <button onClick={handleClick}>
+        <button className="w-full" onClick={handleClick}>
             <div
                 className=" absolute top-0 left-0 w-full h-full
                     shadow-wrapper bg-radioList rounded-lg blur-[1px]
                 "
             ></div>
 
-            <div className="relative z-10 px-[19px] py-[15px] 
-                flex justify-between text-2xl text-white
-                ">
-                <p className="text-left">{name}</p>
+            <div className="relative z-10 px-[19px] py-[15px] flex justify-between">
+                <p className="text-2xl text-left text-white max-w-[95%]">{name}</p>
+                
                 {isInFavorites &&
-                    <div className="w-[22px] h-[auto]"><img src={CheckIcon} alt="Selected" /></div>
+                    <div className="absolute top-[10px] right-[8px]">
+                        <img className="w-[20px]" src={CheckIcon} alt="On Favorites" />
+                    </div>
                 }
             </div>
         </button>

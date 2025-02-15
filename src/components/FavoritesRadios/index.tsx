@@ -125,6 +125,7 @@ const radios = [
 
 const FavoritesRadios = ({
         favoritesRadios,
+        setFavoritesRadios,
         currentStation,
         setCurrentStation,
         setIsDisplayingSearch
@@ -133,6 +134,7 @@ const FavoritesRadios = ({
         favoritesRadios: Station[] | null
         setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>
         setIsDisplayingSearch?: React.Dispatch<React.SetStateAction<boolean>>
+        setFavoritesRadios: React.Dispatch<React.SetStateAction<Station[] | null>>
     }) => {
     
 
@@ -172,7 +174,7 @@ const FavoritesRadios = ({
                         
                         return(
                             <li key={radio.stationuuid}>
-                                <RadioItem {...radio} setCurrentStation={setCurrentStation}/>
+                                <RadioItem {...radio} setCurrentStation={setCurrentStation} setFavoritesRadios={setFavoritesRadios} favoritesRadios={favoritesRadios}/>
                             </li>
                         )
 
