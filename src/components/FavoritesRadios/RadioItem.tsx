@@ -1,16 +1,30 @@
 import { useEffect, useState } from "react";
+
+// Types
+import { RadioItemT } from "../../@types/RadioItem";
+
+// Icons
 import playIcon from "./../../assets/icons/play-circle-icon.svg";
 import stopIcon from "./../../assets/icons/pause-circle-icon.svg";
 import deleteIcon from "./../../assets/icons/delete-icon.svg";
 import editIcon from "./../../assets/icons/edit-icon.svg";
-import { RadioItemT } from "../../@types/RadioItem";
 
-const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesRadios, setCurrentStation, setFavoritesRadios } : RadioItemT) => {
+
+const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrentStation, setFavoritesRadios } : RadioItemT) => {
     const [isNotPlaying, setIsNotPlaying] = useState(false);
     const [isEditingRadio, setIsEditingRadio] = useState(false);
     const [radioName, setRadioName] = useState(name);
     const [radioCountry, setRadioCountry] = useState(name);
 
+    {/* Refresh the play pause icon based on current radio html audio tag status  */}
+    useEffect(() => {
+        setIsNotPlaying(false);
+        const favoriteRadio = document.querySelector<HTMLAudioElement>(`#a${stationuuid}`);
+        const favoriteRadioUuid = (favoriteRadio?.getAttribute("id"))?.slice(1); ;
+        if (favoriteRadio && favoriteRadioUuid === stationuuid) setIsNotPlaying(() => favoriteRadio.paused ? true : false);            
+    });
+
+    {/* Set the current station */}
     const handleStation = () => {
         setCurrentStation({
             stationuuid,
@@ -21,7 +35,8 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
         })
     }
 
-    const handleFavoritesRadios = () => {
+    {/* Update radio properties on edit */}
+    const handleEditRadio = () => {
         setFavoritesRadios((prev) => {
             const radioIndex = prev!.findIndex((radio) => radio.stationuuid === stationuuid )
             const updatedFavorites = prev!.slice(0);
@@ -35,6 +50,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
         setIsEditingRadio(false);
     }
 
+    {/* Exit edit mode and blur input when click.target != inputs */}
     const handleInputBlur = () => {
         const nameInput = document.getElementById(`${stationuuid}name`);
         const countryInput = document.getElementById(`${stationuuid}country`);
@@ -44,7 +60,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
                 return
             } else {
                 (document.activeElement as HTMLInputElement).blur();
-                handleFavoritesRadios();
+                handleEditRadio();
             }
         }, 80) // Need to run inside a setTimeout because onBlur doesn't have any active element
     }
@@ -89,7 +105,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
                                     id={`${stationuuid}name`}
                                     placeholder={radioName}
                                     onChange={(e) => setRadioName(e.target.value)} 
-                                    onKeyDown={(e) => {if (e.key === "Enter") handleFavoritesRadios()}}
+                                    onKeyDown={(e) => {if (e.key === "Enter") handleEditRadio()}}
                                     onBlur={handleInputBlur} 
                                     autoFocus
                                     value={radioName}
@@ -103,7 +119,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
                                     id={`${stationuuid}country`}
                                     placeholder={radioCountry} 
                                     onChange={(e) => setRadioCountry(e.target.value)}
-                                    onKeyDown={(e) => {if (e.key === "Enter") handleFavoritesRadios()}}
+                                    onKeyDown={(e) => {if (e.key === "Enter") handleEditRadio()}}
                                     onBlur={handleInputBlur}  
                                     value={radioCountry} 
                                     className="hidden capitalize lg:block placeholder:text-black rounded-sm bg-[rgba(225,113,0,0.5)] 

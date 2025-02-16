@@ -1,3 +1,4 @@
+{/* Icons */}
 import CheckIcon from "./../../assets/icons/favorite-icon.svg"
 
 const Filters = ({filter, setFilter} : {filter: "name" | "country" | "language", setFilter: React.Dispatch<React.SetStateAction<"name" | "country" | "language">>}) => {

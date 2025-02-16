@@ -1,7 +1,13 @@
-import searchIcon from './../../assets/icons/search-icon.svg'
+// Types
+import { Station } from '../../@types/Station';
+
+// Components
 import { CurrentRadio } from './CurrentRadio';
 import { RadioItem } from './RadioItem'
-import { Station } from '../../@types/Station';
+
+// Icons
+import searchIcon from './../../assets/icons/search-icon.svg'
+
 
 const FavoritesRadios = ({
         favoritesRadios,
@@ -54,7 +60,7 @@ const FavoritesRadios = ({
                         
                         return(
                             <li key={radio.stationuuid}>
-                                <RadioItem {...radio} setCurrentStation={setCurrentStation} setFavoritesRadios={setFavoritesRadios} favoritesRadios={favoritesRadios}/>
+                                <RadioItem {...radio} setCurrentStation={setCurrentStation} setFavoritesRadios={setFavoritesRadios} />
                             </li>
                         )
 

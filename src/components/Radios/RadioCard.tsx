@@ -2,20 +2,20 @@ import CheckIcon from "./../../assets/icons/favorite-icon.svg";
 import { RadioCardT } from "../../@types/RadioCard";
 
 const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stationuuid, name, url_resolved, country, tags} : RadioCardT) => {
-    const isInFavorites = favoritesRadios?.find(station => station.stationuuid === stationuuid);
+    const isInFavorites = favoritesRadios?.find(station => station.stationuuid === stationuuid); // If true display a check icon on right side
     
     const handleClick = () => {
         setFavoritesRadios((prev) => {
             if (prev) {
                 const favoriteIndex = prev.findIndex((station) => station.stationuuid === stationuuid); // Verify if is's already a favorite station
                 
-                // If is in favorites, favoriteIndex returns index, else favoriteIndex returns -1 and jump to else statement to add to favorites
+                // If is in favorites, favoriteIndex returns index than when user click on radio again remove it from favorites
                 if (favoriteIndex >= 0) {
                     const newFavorites = prev.slice(0); // clone the list
                     newFavorites.splice(favoriteIndex, favoriteIndex + 1); // remove the station
                     localStorage.setItem("radios", JSON.stringify(newFavorites))
                     return newFavorites;
-                } else {
+                } else { // If in not on favorites, add to favorites
                     const newFavorite = [ ...prev, 
                         {
                             stationuuid,
@@ -36,7 +36,6 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
                     country,
                     tags
                 }];
-                console.log(newFavorite);
                 localStorage.setItem("radios", JSON.stringify(newFavorite));
                 return newFavorite;
             }
@@ -50,7 +49,9 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
             url_resolved,
             country,
             tags
-        })
+        });
+
+        return;
     }
 
     return (
