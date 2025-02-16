@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+
 // Types
 import { Station } from "../../@types/Station";
 import { RadioSearchT } from "../../@types/RadioSearch";
 
 // Components
 import { RadioCard } from "./RadioCard";
+import { Filters } from "./Filters";
+
 // Icons
 import MenuIcon from "./../../assets/icons/menu-icon.svg";
 import ReturnIcon from "./../../assets/icons/return-icon.svg";
@@ -13,8 +16,12 @@ import BackIcon from "./../../assets/icons/back-icon.svg"
 
 const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStation, favoritesRadios} : RadioSearchT) => {
     const [radios, setRadios] = useState<Station[] | null>(null);
-    const [pagination, setPagination] = useState<number[]>([1, 2, 3, 4])
-    const [paginationOffset, setPaginationOffset] = useState(0)
+    const [pagination, setPagination] = useState<number[]>([1, 2, 3, 4]);
+    const [paginationOffset, setPaginationOffset] = useState(0);
+    const [isShowingFilters, setIsShowingFilters] = useState(false);
+    const [filter, setFilter] = useState<"name" | "country" | "language">("name");
+    const [search, setSearch] = useState<string>("");
+    const [searchTrigger, setSearchTrigger] = useState(true);
 
     const getData = async (url: string) => {
             
@@ -54,11 +61,27 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
             //.
             console.log(error); 
         }
+
+        console.log(url)
     }
 
     useEffect(() => {
-        getData(`https://de1.api.radio-browser.info/json/stations/search?limit=10&offset=${paginationOffset}`);
-    }, [paginationOffset])
+        if (search) {
+            switch (filter) {
+                case "name":
+                    getData(`https://de1.api.radio-browser.info/json/stations/byname/${search}?limit=10&offset=${paginationOffset}`);
+                    break;
+                case "country":
+                    getData(`http://de1.api.radio-browser.info/json/stations/bycountry/${search}?limit=10&offset=${paginationOffset}`);
+                    break;
+                case "language":
+                    getData(`http://de1.api.radio-browser.info/json/stations/bylanguage/${search}?limit=10&offset=${paginationOffset}`);
+                    break;
+            }
+        } else {
+            getData(`http://de1.api.radio-browser.info/json/stations?limit=10&offset=${paginationOffset}`);
+        }
+    }, [paginationOffset, filter, searchTrigger])
     
     
     // Refresh the Radio List when click on a pagination number
@@ -113,34 +136,53 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
         }
     }
 
+    const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            setSearchTrigger((prev) => !prev); 
+            setPaginationOffset(0);
+        } return;
+    }
+
     return (
         <div className="pb-[30px]">
             {/* Return Button */}
-            <button className="float-left py-3 lg:hidden">
+            <button onClick={() => setIsDisplayingSearch && setIsDisplayingSearch(false)} 
+                className="float-left py-3 lg:hidden"
+            >
                 <img
                     src={ReturnIcon}
                     className="w-[35px] h-auto"
                     alt="Return to your favorites Radios" />
             </button>
 
-            {/* Menu Button */}
-            <button onClick={() => setIsDisplayingSearch && setIsDisplayingSearch(false)}
+            {/* Filters Button */}
+            <button onClick={() => setIsShowingFilters(!isShowingFilters)}
                 className="float-right py-3"
             >
-                <img src={MenuIcon} alt="Show Radios" />
+                <img src={MenuIcon} alt="Show Filters" />
             </button>
 
+            {/* Filters */}
+            {isShowingFilters && 
+                <div className="relative top-[50px] w-fit mx-auto">
+                    <Filters filter={filter} setFilter={setFilter}/>
+                </div>
+            }
+
             {/* Search form*/}
-            <form className="w-full mt-[70px] flex justify-center">
+            <div className="w-full mt-[70px] flex justify-center">
                 <input
                     type="text"
                     placeholder="Search here"
+                    onChange={(e) => setSearch(e.target.value)}
+                    onKeyDown={(e) => handleSearch(e)}
+                    value={search}
                     className="w-80 px-[20px] py-[9px]
                         text-white
                         bg-radio rounded-lg shadow-[inset_0px_2px_6px_rgba(0,0,0,0.4)]
                         placeholder:text-white"
                 />
-            </form>
+            </div>
 
             {/* Radio List */}
             <ul className="mt-[49px] flex flex-col gap-[21px]">

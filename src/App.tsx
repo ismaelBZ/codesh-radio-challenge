@@ -125,9 +125,11 @@ const data = [
 
 function App() {
     const [deviceType, setDeviceType] = useState<"mobile" | "desktop">("mobile");
-    const [isDisplayingSearch, setIsDisplayingSearch] = useState(false)
+    const [isDisplayingSearch, setIsDisplayingSearch] = useState<boolean>(false)
     const [currentStation, setCurrentStation] = useState<Station | null>(null);
     const [favoritesRadios, setFavoritesRadios] = useState<Station[] | null>(null);
+
+    
 
     useEffect(() => {
         handleDeviceType();
@@ -158,13 +160,14 @@ function App() {
                             setFavoritesRadios={setFavoritesRadios} 
                             setIsDisplayingSearch={setIsDisplayingSearch} 
                             setCurrentStation={setCurrentStation}
-                        /> 
-                    : 
-                        <FavoritesRadios
-                            favoritesRadios={favoritesRadios} 
-                            currentStation={currentStation}
-                            setCurrentStation={setCurrentStation}
-                            setFavoritesRadios={setFavoritesRadios} 
+                            /> 
+                            : 
+                            <FavoritesRadios
+                                favoritesRadios={favoritesRadios} 
+                                currentStation={currentStation}
+                                setCurrentStation={setCurrentStation}
+                                setFavoritesRadios={setFavoritesRadios} 
+                                setIsDisplayingSearch={setIsDisplayingSearch} 
                         />
                     }
                 </div>
