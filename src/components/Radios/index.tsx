@@ -62,7 +62,6 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
             console.log(error); 
         }
 
-        console.log(url)
     }
 
     useEffect(() => {

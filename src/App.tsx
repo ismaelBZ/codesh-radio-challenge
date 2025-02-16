@@ -127,9 +127,7 @@ function App() {
     const [deviceType, setDeviceType] = useState<"mobile" | "desktop">("mobile");
     const [isDisplayingSearch, setIsDisplayingSearch] = useState<boolean>(false)
     const [currentStation, setCurrentStation] = useState<Station | null>(null);
-    const [favoritesRadios, setFavoritesRadios] = useState<Station[] | null>(null);
-
-    
+    const [favoritesRadios, setFavoritesRadios] = useState<Station[] | null>(localStorage.getItem("radios") ? JSON.parse(localStorage.getItem("radios")!) : null);
 
     useEffect(() => {
         handleDeviceType();

@@ -28,6 +28,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
             // const newName = radioName.match(new RegExp(/^ *$/)) ? prev![radioIndex].name : radioName
             updatedFavorites[radioIndex].name = radioName;
             updatedFavorites[radioIndex].country = radioCountry;
+            localStorage.setItem("radios", JSON.stringify(updatedFavorites));
             return updatedFavorites;
         });
         (document.activeElement as HTMLInputElement).blur();
@@ -51,7 +52,8 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, favoritesR
     const handleDeleteRadio = (stationuuid: string) => {
         setFavoritesRadios((prev) => {
             if (prev) {
-                const newRadios = prev!.filter((radio) => radio.stationuuid !== stationuuid) 
+                const newRadios = prev!.filter((radio) => radio.stationuuid !== stationuuid); 
+                localStorage.setItem("radios", JSON.stringify(newRadios));
                 return newRadios;
             } else {
                 return prev;

@@ -13,7 +13,7 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
                 if (favoriteIndex >= 0) {
                     const newFavorites = prev.slice(0); // clone the list
                     newFavorites.splice(favoriteIndex, favoriteIndex + 1); // remove the station
-                    localStorage.setItem("radios", newFavorites.toString())
+                    localStorage.setItem("radios", JSON.stringify(newFavorites))
                     return newFavorites;
                 } else {
                     const newFavorite = [ ...prev, 
@@ -25,7 +25,7 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
                             tags
                         }
                     ]
-                    localStorage.setItem("radios", newFavorite.toString());
+                    localStorage.setItem("radios", JSON.stringify(newFavorite));
                     return newFavorite;
                 }
             } else { // If it's the firs favorite station
@@ -36,8 +36,8 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
                     country,
                     tags
                 }];
-
-                localStorage.setItem("radios", newFavorite.toString());
+                console.log(newFavorite);
+                localStorage.setItem("radios", JSON.stringify(newFavorite));
                 return newFavorite;
             }
         })
