@@ -16,6 +16,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
     const [radioName, setRadioName] = useState(name);
     const [radioCountry, setRadioCountry] = useState(name);
 
+    
     {/* Refresh the play pause icon based on current radio html audio tag status  */}
     useEffect(() => {
         setIsNotPlaying(true);
@@ -24,7 +25,6 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
         if (favoriteRadio && favoriteRadioUuid === stationuuid) setIsNotPlaying(!currentStation!.isPlaying!);
     },);
 
-    console.log("isNotPlaying " + isNotPlaying);
 
     {/* Set the current station */}
     const handleStation = () => {
@@ -37,6 +37,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
             isPlaying: isNotPlaying 
         })
     }
+
 
     {/* Update radio properties on edit */}
     const handleEditRadio = () => {
@@ -53,6 +54,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
         setIsEditingRadio(false);
     }
 
+
     {/* Exit edit mode and blur input when click.target != inputs */}
     const handleInputBlur = () => {
         const nameInput = document.getElementById(`${stationuuid}name`);
@@ -68,6 +70,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
         }, 80) // Need to run inside a setTimeout because onBlur doesn't have any active element
     }
 
+
     const handleDeleteRadio = (stationuuid: string) => {
         setFavoritesRadios((prev) => {
             if (prev) {
@@ -79,6 +82,8 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
             }
         });
     }
+
+
 
     return (
         <div className="-mx-[6px] py-[15px] px-[12px] relative">

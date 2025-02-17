@@ -9,7 +9,7 @@ import PauseButton from "./../../assets/icons/pause-icon.svg"
 
 
 const CurrentRadio = ({station, setCurrentStation} : {station: Station | null, setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>}) => {
-    const [isPlaying, setIsPlaying] = useState<boolean>(true);
+    const [isPlaying, setIsPlaying] = useState<boolean>(true); 
     
     useEffect(() => { // play/pause basic on favorite radio item iteration
         const audio = document.querySelector<HTMLAudioElement>(`#a${station!.stationuuid}`);
@@ -19,8 +19,7 @@ const CurrentRadio = ({station, setCurrentStation} : {station: Station | null, s
         setIsPlaying(updatedStatus);
     }, [station]);
 
-    console.log("isplaying " + isPlaying);
-    
+
     const handlePlay = () => {
         const audio = document.querySelector<HTMLAudioElement>(`#a${station!.stationuuid}`);
         if (isPlaying)  {
@@ -38,6 +37,7 @@ const CurrentRadio = ({station, setCurrentStation} : {station: Station | null, s
         setIsPlaying(!audio!.paused); // Refresh isPlayng status based on html audio current status
     } 
     
+
     return (
         <div className="relative py-1 z-10">
             <div className="py-[15px] px-[6px] flex justify-between items-center">

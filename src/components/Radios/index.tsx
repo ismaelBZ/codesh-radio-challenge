@@ -66,14 +66,14 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
                     getData(`https://de1.api.radio-browser.info/json/stations/byname/${search}?limit=10&offset=${paginationOffset}`);
                     break;
                 case "country":
-                    getData(`http://de1.api.radio-browser.info/json/stations/bycountry/${search}?limit=10&offset=${paginationOffset}`);
+                    getData(`https://de1.api.radio-browser.info/json/stations/bycountry/${search}?limit=10&offset=${paginationOffset}`);
                     break;
                 case "language":
-                    getData(`http://de1.api.radio-browser.info/json/stations/bylanguage/${search}?limit=10&offset=${paginationOffset}`);
+                    getData(`https://de1.api.radio-browser.info/json/stations/bylanguage/${search}?limit=10&offset=${paginationOffset}`);
                     break;
             }
         } else {
-            getData(`http://de1.api.radio-browser.info/json/stations?limit=10&offset=${paginationOffset}`);
+            getData(`https://de1.api.radio-browser.info/json/stations?limit=10&offset=${paginationOffset}`);
         }
     }, [paginationOffset, filter, searchTrigger])
     
