@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Types
 import { Station } from "../../@types/Station";
@@ -8,8 +8,8 @@ import PlayButton from "./../../assets/icons/play-icon.svg"
 import PauseButton from "./../../assets/icons/pause-icon.svg"
 
 
-const CurrentRadio = ({station} : {station: Station | null}) => {
-    const [isPlaying, setIsPlaying] = useState(true);
+const CurrentRadio = ({station, setCurrentStation} : {station: Station | null, setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>}) => {
+    const [isPlaying, setIsPlaying] = useState<boolean>(station ? station.isPlaying! : true);
     
     const handlePlay = () => {
         const audio = document.querySelector<HTMLAudioElement>(`#a${station!.stationuuid}`);
@@ -19,6 +19,12 @@ const CurrentRadio = ({station} : {station: Station | null}) => {
             audio!.play();
         }
         
+        setCurrentStation((prev) => {
+            return {
+                ...prev!,
+                isPlaying: !audio!.paused
+            }
+        })
         setIsPlaying(!audio!.paused); // Refresh isPlayng status based on html audio current status
     } 
     
@@ -30,7 +36,7 @@ const CurrentRadio = ({station} : {station: Station | null}) => {
                     <button
                         onClick={() => handlePlay()}
                         className="px-[12px] py-[9px]">
-                        <img src={isPlaying ? PlayButton : PauseButton} alt={isPlaying ? "Stop" : "Play"} />
+                        <img src={station!.isPlaying ? PlayButton : PauseButton} alt={isPlaying ? "Stop" : "Play"} />
                     </button>
 
                     {/* Audio */}

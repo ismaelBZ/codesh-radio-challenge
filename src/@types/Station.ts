@@ -4,4 +4,5 @@ export type Station = {
     url_resolved: string,
     country: string,
     tags?: string
+    isPlaying?: boolean
 }

@@ -50,7 +50,7 @@ const FavoritesRadios = ({
 
                 {/* Current Radio */}
                 {currentStation &&           
-                    <CurrentRadio station={currentStation}/>
+                    <CurrentRadio station={currentStation} setCurrentStation={setCurrentStation}/>
                 }
 
                 {/* Radios List */}
@@ -60,7 +60,7 @@ const FavoritesRadios = ({
                         
                         return(
                             <li key={radio.stationuuid}>
-                                <RadioItem {...radio} setCurrentStation={setCurrentStation} setFavoritesRadios={setFavoritesRadios} />
+                                <RadioItem {...radio} setCurrentStation={setCurrentStation} currentStation={currentStation} setFavoritesRadios={setFavoritesRadios} />
                             </li>
                         )
 

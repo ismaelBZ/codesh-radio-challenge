@@ -48,7 +48,8 @@ const RadioCard = ({favoritesRadios, setFavoritesRadios, setCurrentStation, stat
             stationuuid,
             url_resolved,
             country,
-            tags
+            tags,
+            isPlaying: true // is true because is the first time adding a station and the audio tag autoplay is enable 
         });
 
         return;

@@ -10,18 +10,18 @@ import deleteIcon from "./../../assets/icons/delete-icon.svg";
 import editIcon from "./../../assets/icons/edit-icon.svg";
 
 
-const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrentStation, setFavoritesRadios } : RadioItemT) => {
-    const [isNotPlaying, setIsNotPlaying] = useState(false);
+const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrentStation, currentStation, setFavoritesRadios } : RadioItemT) => {
+    const [isNotPlaying, setIsNotPlaying] = useState(true);
     const [isEditingRadio, setIsEditingRadio] = useState(false);
     const [radioName, setRadioName] = useState(name);
     const [radioCountry, setRadioCountry] = useState(name);
 
     {/* Refresh the play pause icon based on current radio html audio tag status  */}
     useEffect(() => {
-        setIsNotPlaying(false);
+        setIsNotPlaying(true);
         const favoriteRadio = document.querySelector<HTMLAudioElement>(`#a${stationuuid}`);
         const favoriteRadioUuid = (favoriteRadio?.getAttribute("id"))?.slice(1); ;
-        if (favoriteRadio && favoriteRadioUuid === stationuuid) setIsNotPlaying(() => favoriteRadio.paused ? true : false);            
+        if (favoriteRadio && favoriteRadioUuid === stationuuid) setIsNotPlaying(!currentStation!.isPlaying!);            
     });
 
     {/* Set the current station */}
@@ -31,7 +31,8 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
             name,
             url_resolved,
             country,
-            tags
+            tags,
+            isPlaying: isNotPlaying ? true : false
         })
     }
 
@@ -91,7 +92,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
 
                     {/* Play Pause Button*/}
                     <button onClick={handleStation}>
-                        <img src={isNotPlaying ? playIcon : stopIcon} alt={isNotPlaying ? "Play" : "Stop"} />
+                        <img src={isNotPlaying ? stopIcon : playIcon} alt={isNotPlaying ? "Play" : "Stop"} />
                     </button>
 
                     {/* Audio */}
