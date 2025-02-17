@@ -2,13 +2,17 @@
 
 📻 Radio browser é um projeto de uma rádio online que faz você reviver os velhos tempos. 
 
-[Radio Browser - Vercel](https://codesh-radio-browser.vercel.app/)
+[Radio Browser - Vercel](https://codesh-radio-browser.vercel.app/) 
+
 [Radio Browser - Vercel2](https://codesh-radio-browser-carecanaclouds-projects.vercel.app/)
+
 [Radio Browser - Vercel3](https://codesh-radio-browser-carecanacloud-carecanaclouds-projects.vercel.app/)
+
 [Radio Browser - aws](http://54.207.178.228/)
+
 [Radio Browser - aws](http://ec2-54-207-178-228.sa-east-1.compute.amazonaws.com/)
 
-[docker - ](https://hub.docker.com/repository/docker/ismaelbz/codesh-radio-browser/general)
+[docker image](https://hub.docker.com/repository/docker/ismaelbz/codesh-radio-browser/general)
 
 ## Tecnologias utilizadas
 
