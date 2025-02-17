@@ -9,7 +9,17 @@ import PauseButton from "./../../assets/icons/pause-icon.svg"
 
 
 const CurrentRadio = ({station, setCurrentStation} : {station: Station | null, setCurrentStation: React.Dispatch<React.SetStateAction<Station | null>>}) => {
-    const [isPlaying, setIsPlaying] = useState<boolean>(station ? station.isPlaying! : true);
+    const [isPlaying, setIsPlaying] = useState<boolean>(true);
+    
+    useEffect(() => { // play/pause basic on favorite radio item iteration
+        const audio = document.querySelector<HTMLAudioElement>(`#a${station!.stationuuid}`);
+        const updatedStatus = station?.isPlaying!
+        if (updatedStatus) audio!.play();
+        if (!updatedStatus) audio!.pause()
+        setIsPlaying(updatedStatus);
+    }, [station]);
+
+    console.log("isplaying " + isPlaying);
     
     const handlePlay = () => {
         const audio = document.querySelector<HTMLAudioElement>(`#a${station!.stationuuid}`);

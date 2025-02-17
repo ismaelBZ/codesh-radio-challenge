@@ -21,8 +21,10 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
         setIsNotPlaying(true);
         const favoriteRadio = document.querySelector<HTMLAudioElement>(`#a${stationuuid}`);
         const favoriteRadioUuid = (favoriteRadio?.getAttribute("id"))?.slice(1); ;
-        if (favoriteRadio && favoriteRadioUuid === stationuuid) setIsNotPlaying(!currentStation!.isPlaying!);            
-    });
+        if (favoriteRadio && favoriteRadioUuid === stationuuid) setIsNotPlaying(!currentStation!.isPlaying!);
+    },);
+
+    console.log("isNotPlaying " + isNotPlaying);
 
     {/* Set the current station */}
     const handleStation = () => {
@@ -32,7 +34,7 @@ const RadioItem = ( { name, stationuuid, url_resolved, country, tags, setCurrent
             url_resolved,
             country,
             tags,
-            isPlaying: isNotPlaying ? true : false
+            isPlaying: isNotPlaying 
         })
     }
 
