@@ -2,11 +2,11 @@
 
 📻 Radio browser é um projeto de uma rádio online que faz você reviver os velhos tempos. 
 
-[Radio Browser - Vercel](https://codesh-radio-challenge.vercel.app/) 
+[Radio Browser - Vercel](https://codesh-radio-browser.vercel.app/) 
 
-[Radio Browser - Vercel2](https://codesh-radio-challenge-carecanaclouds-projects.vercel.app/)
+[Radio Browser - Vercel2](https://codesh-radio-challenge.vercel.app/)
 
-[Radio Browser - Vercel3](https://codesh-radio-challenge-carecanacloud-carecanaclouds-projects.vercel.app/)
+[Radio Browser - Vercel3](https://codesh-radio-challenge-carecanaclouds-projects.vercel.app/)
 
 [Docker](https://hub.docker.com/r/ismaelbz/codesh-radio-browser/tags)
 
