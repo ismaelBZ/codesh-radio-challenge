@@ -22,7 +22,7 @@
 ### Pré-requisitos
 
 - Node.js (versão 16 ou superior)
-- Gerenciador de pacotes de sua preferência (exemplos: NPM e Yarn)
+- Gerenciador de pacotes NPM
 
 ### Faça o download do repositório no seu computador
 
@@ -35,17 +35,11 @@ Ou se preferir
 
 `git clone git@github.com:ismaelBZ/codesh-radio-challenge.git`
 
-
 ## Intale as dependências
 
 Abra o terminal do seu computador no diretório do projeto e execute: 
 
 `npm install`
-
-Ou
-
-`yarn `
-
 
 ## Rodando em Servido de Desenvolvimento
 
