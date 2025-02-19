@@ -8,11 +8,6 @@
 
 [Radio Browser - Vercel3](https://codesh-radio-browser-carecanacloud-carecanaclouds-projects.vercel.app/)
 
-[Radio Browser - aws](http://54.207.178.228/)
-
-[Radio Browser - aws](http://ec2-54-207-178-228.sa-east-1.compute.amazonaws.com/)
-
-[docker image](https://hub.docker.com/repository/docker/ismaelbz/codesh-radio-browser/general)
 
 ## Tecnologias utilizadas
 
