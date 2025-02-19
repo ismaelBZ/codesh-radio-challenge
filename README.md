@@ -8,6 +8,7 @@
 
 [Radio Browser - Vercel3](https://codesh-radio-browser-carecanacloud-carecanaclouds-projects.vercel.app/)
 
+[Docker](https://hub.docker.com/r/ismaelbz/codesh-radio-browser/tags)
 
 ## Tecnologias utilizadas
 
