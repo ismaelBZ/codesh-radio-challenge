@@ -19,12 +19,13 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
     const [radios, setRadios] = useState<Station[] | null>(null); // Fetched radio stations from API
     const [pagination, setPagination] = useState<number[]>([1, 2, 3, 4]);
     const [paginationOffset, setPaginationOffset] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(1);
     const [isShowingFilters, setIsShowingFilters] = useState(false);
     const [filter, setFilter] = useState<"name" | "country" | "language">("name");
     const [search, setSearch] = useState<string>("");
     const [searchTrigger, setSearchTrigger] = useState(true); // Only fetch on search typing when press enter
 
-
+    
     const getData = async (url: string) => { 
         try {
             // Request needs basic header to allow CORS in API 
@@ -82,52 +83,53 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
     // Change the pagination numbers and refresh Radio List based on interaction < | i | i | >>
     const handlePagination = (option: "previous" | "next" | "index", index?: number) => {
         if (option === "previous") {
-            setPagination((prev) => {
+            setActiveIndex((prevIndex) => {
                 // Verify if it's on first pagination 
-                if (prev[0] === 1) {
-                    // If it's on first pagination and is on first index return, ele recalculate paginationOffset based on index
-                    setPaginationOffset((prev) => {
-                        if (prev === 0) {
+                if (prevIndex === 1) {
+                    return prevIndex;
+                } else {
+                    const newIndex = prevIndex - 1
+
+                    setPagination((prev) => {
+                        if (prev[0] === 1) {
                             return prev;
                         } else {
-                            return (((prev / 10) - 1) * 10); // prev / 10 = pagination index, reduced by 1 and multiplyed by 10 = new offset 
+                            let newPagination = []
+                            for (let i=0; i<4; i++) {
+                                newPagination.push(pagination[i] -1 );
+                            }
+                            return newPagination
                         }
-                    })                    
-                    return prev; // On First pagination return the same pagination
-                } else { // It's not on firs pagination
-                    // Update the paginationOffset and refresh the radio list
-                    setPaginationOffset((prev) => {
-                        return (((prev / 10) - 1) * 10); // prev / 10 = pagination index, reduced by 1 and multiplyed by 10 = new offset
-                    })
-                    
-                    // Decrease pagination 
-                    let newPagination = []
-                    for (let i=0; i<4; i++) {
-                        newPagination.push(pagination[i] -1 );
-                    }
-                    return newPagination
+                    });
+
+                    setPaginationOffset((newIndex - 1) * 10);
+
+                    return newIndex
                 }
             })
         } else if (option === "next") {
             setPagination(() => { 
-                // Refresh the radio List
-                setPaginationOffset((prev) => {
-                    return (((prev / 10) + 1) * 10); // prev / 10 = pagination index, reduced by 1 and multiplyed by 10 = new offset
-                })
-
                 let newPagination: number[] = []
                 for (let i=0; i<4; i++) {
                     newPagination.push(pagination[i] + 1);
                 }
                 return newPagination  
-            })
+            });
+            setActiveIndex((prevIndex) => {
+                const newIndex = prevIndex + 1
+            
+                // Refresh the radio List
+                setPaginationOffset(() => {
+                    return prevIndex * 10
+                })
+                return newIndex;
+            });
         }
         if (option === "index") {
+            setActiveIndex(index!);
             setPaginationOffset((index! -1) * 10);
         }
     }
-
-    // Need to implement an user friendly pagination index status
 
 
     {/* Uptate radio list search input keyDown === "Enter" */}
@@ -209,6 +211,15 @@ const RadioSearch = ({setIsDisplayingSearch, setFavoritesRadios, setCurrentStati
                                     className="px-[15px] py-[9px] w-[50px] text-center text-white bg-radio
                                         shadow-[inset_1px_2px_2px_rgba(0,0,0,0.5),inset_-1px_-2px_2px_rgba(0,0,0,0.5)]
                                     "
+                                    style={activeIndex === pageIndex ? 
+                                        {boxShadow: `
+                                            inset 1px 2px 2px rgba(0,0,0,0.5),
+                                            inset -1px -2px 2px rgba(0,0,0,0.5), 
+                                            inset 0px 0px 7px rgba(18, 103, 252, 1), 
+                                            inset 0px 0px 30px rgba(18, 103, 252, 0.2), 
+                                            0px 0px 5px rgba(18, 103, 252, 0.8)`, 
+                                            color: "rgb(204, 233, 255)",
+                                    } : {}} 
                                 >
                                     {pageIndex}
                                 </button>
