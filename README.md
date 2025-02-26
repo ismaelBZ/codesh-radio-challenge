@@ -34,7 +34,7 @@ Ou se preferir
 
 - pode clonar o repositório utilizando o git através:
 
-`git clone git@github.com:ismaelBZ/codesh-radio-challenge.git`
+`git clone https://github.com/ismaelBZ/codesh-radio-challenge.git`
 
 ## Intale as dependências
 
